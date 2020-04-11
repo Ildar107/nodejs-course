@@ -5,6 +5,7 @@ const YAML = require('yamljs');
 const userRouter = require('./resources/users/user.router');
 const boardRouter = require('./resources/boards/board.router');
 const tasksRouter = require('./resources/tasks/task.router');
+const logger = require('./logger/winston');
 
 const app = express();
 const swaggerDocument = YAML.load(path.join(__dirname, '../doc/api.yaml'));
@@ -21,8 +22,22 @@ app.use('/', (req, res, next) => {
   next();
 });
 
+app.use((req,res, next) => {
+  logger.info({
+    url: req.originalUrl,
+    params: req.body,
+    body: req.body
+  });
+  next();
+});
+
 app.use('/users', userRouter);
 app.use('/boards', boardRouter);
 app.use('/boards/:boardId/tasks', tasksRouter);
+
+app.use((err, req, res, next) => {
+  logger.error(err.message);
+  res.status(500).send('Server error!');
+});
 
 module.exports = app;

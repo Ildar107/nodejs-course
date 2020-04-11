@@ -41,4 +41,11 @@ const deleteTask = async (id) => {
   return task;
 };
 
-module.exports = { getAll, create, getTask, updateTask, deleteTask };
+const clearUsers = async(userId) => {
+  database.tasks.filter((x) => x.userId === userId).map((x) => {
+    x.userId = null
+    return x;
+  })
+}
+
+module.exports = { getAll, create, getTask, updateTask, deleteTask, clearUsers };

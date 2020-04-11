@@ -1,52 +1,52 @@
 const router = require('express').Router({mergeParams: true});
 const Task = require('./task.model');
 const tasksService = require('./task.service');
+const errorCatchWrapper = require('../../utils/errorCatchWrapper');
+const { BAD_REQUEST, NOT_FOUND, OK, NO_CONTENT} = require('http-status-codes');
 
 
-router.route('/').get(async (req, res) => {
+router.route('/').get(errorCatchWrapper(async (req, res) => {
   const tasks = await tasksService.getAll();
-  res.json(tasks);
-});
+  res.status(OK).json(tasks);
+}));
 
-router.route('/').post(async (req, res) => {
-  console.log(req.params)
+router.route('/').post(errorCatchWrapper(async (req, res) => {
   if(!req.body) {
-    res.status(400).send('Bad request');
+    res.status(BAD_REQUEST).send('Bad request');
     return;
   }
   const task = await tasksService.create(req.body, req.params.boardId);
-  res.json(task);
-  //res.json('The task has been created.');
-});
+  res.status(OK).json(task);
+}));
 
-router.route('/:id').get(async (req, res) => {
+router.route('/:id').get(errorCatchWrapper(async (req, res) => {
   const task = await tasksService.getTask(req.params.id);
   if(task !== undefined)
-    res.json(task);
+    res.status(OK).json(task);
   else 
-    res.status(404).send('Task not found');
-})
+    res.status(NOT_FOUND).send('Task not found');
+}));
 
-router.route('/:id').put(async (req, res) => {
+router.route('/:id').put(errorCatchWrapper(async (req, res) => {
   if(!req.body) {
-    res.status(400).send('Bad request');
+    res.status(BAD_REQUEST).send('Bad request');
     return;
   }
   const task = await tasksService.updateTask(req.params.id, req.body);
   if(task !== undefined)
-    res.json('The task has been updated.');
+    res.status(OK).json('The task has been updated.');
   else 
-    res.status(404).send('Task not found');
+    res.status(NOT_FOUND).send('Task not found');
  
-})
+}));
 
-router.route('/:id').delete(async (req, res) => {
+router.route('/:id').delete(errorCatchWrapper(async (req, res) => {
   const task = await tasksService.deleteTask(req.params.id);
   if(task !== undefined)
-    res.status(204).send('The task has been deleted');
+    res.status(OK).send('The task has been deleted');
   else 
-    res.status(404).send('Task not found');
-})
+    res.status(NOT_FOUND).send('Task not found');
+}));
 
 
 module.exports = router;

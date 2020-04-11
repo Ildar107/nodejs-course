@@ -10,4 +10,6 @@ const updateTask = (id, data) => tasksRepo.updateTask(id, data);
 
 const deleteTask = (id) => tasksRepo.deleteTask(id);
 
-module.exports = { getAll, create, getTask, updateTask, deleteTask };
+const clearUsers = (userId) => tasksRepo.clearUsers(userId);
+
+module.exports = { getAll, create, getTask, updateTask, deleteTask, clearUsers };
