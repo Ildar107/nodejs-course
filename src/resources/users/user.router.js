@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const User = require('./user.model');
 const usersService = require('./user.service');
+<<<<<<< HEAD
 const errorCatchWrapper = require('../../utils/errorCatchWrapper');
 const { BAD_REQUEST, NOT_FOUND, OK, NO_CONTENT} = require('http-status-codes');
 
@@ -42,5 +43,13 @@ router.route('/:id').delete(errorCatchWrapper(async (req, res) => {
   else 
     res.status(NOT_FOUND).send('User not found');
 }))
+=======
+
+router.route('/').get(async (req, res) => {
+  const users = await usersService.getAll();
+  // map user fields to exclude secret fields like "password"
+  res.json(users.map(User.toResponse));
+});
+>>>>>>> ee60976ee4afde3b2d74e4ec936dcd00a7a06e6e
 
 module.exports = router;

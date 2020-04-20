@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const usersRepo = require('./user.db.repository');
 const tasksService = require('../tasks/task.service');
 
@@ -18,3 +19,10 @@ const deleteUser = async (id) => {
 }
 
 module.exports = { getAll, create, getUser, updateUser, deleteUser };
+=======
+const usersRepo = require('./user.memory.repository');
+
+const getAll = () => usersRepo.getAll();
+
+module.exports = { getAll };
+>>>>>>> ee60976ee4afde3b2d74e4ec936dcd00a7a06e6e
