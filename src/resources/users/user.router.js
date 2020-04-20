@@ -20,7 +20,7 @@ router.route('/').post(errorCatchWrapper(async (req, res, next) => {
 
 router.route('/:id').get(errorCatchWrapper(async (req, res) => {
   const user = await usersService.getUser(req.params.id);
-  if(user !== undefined)
+  if(user)
     res.status(OK).json(User.toResponse(user));
   else 
    res.status(NOT_FOUND).json('User not found');
@@ -36,8 +36,8 @@ router.route('/:id').put(errorCatchWrapper(async (req, res) => {
 }))
 
 router.route('/:id').delete(errorCatchWrapper(async (req, res) => {
-  const user = await usersService.deleteUser(req.params.id);
-  if(user !== undefined)
+  const isDeleted = await usersService.deleteUser(req.params.id);
+  if(isDeleted)
     res.status(NO_CONTENT).send('The user has been deleted');
   else 
     res.status(NOT_FOUND).send('User not found');

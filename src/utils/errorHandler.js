@@ -1,6 +1,7 @@
 const logger = require('../logger/winston');
 
 const errorHandler = (error) => {
+    console.log(error)
     if(error.message !== undefined) {
         logger.error(error.message);
         setTimeout(() => process.exit(1), 1000);

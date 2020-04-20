@@ -1,20 +1,20 @@
-const usersRepo = require('./user.memory.repository');
+const usersRepo = require('./user.db.repository');
 const tasksService = require('../tasks/task.service');
 
 const getAll = () => usersRepo.getAll();
 
-const create = (data) => usersRepo.create(data);
+const create = (user) => usersRepo.create(user);
 
 const getUser = (id) => usersRepo.getUser(id);
 
-const updateUser = (id, data) => usersRepo.updateUser(id, data);
+const updateUser = (id, user) => usersRepo.updateUser(id, user);
 
 const deleteUser = async (id) => {
-    const user = await usersRepo.deleteUser(id);
-    if(user) {
-        tasksService.clearUsers(id);
+    const count = await usersRepo.deleteUser(id);
+    if(count > 0) {
+        await tasksService.clearUsers(id);
     }
-    return user;
+    return count > 0;
 }
 
 module.exports = { getAll, create, getUser, updateUser, deleteUser };

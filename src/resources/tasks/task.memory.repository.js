@@ -1,4 +1,4 @@
-const database = require('../../data/bd');
+const database = require('../../db/bd');
 const Task = require('./task.model');
 
 const getAll = async () => {
