@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const database = require('../../db/bd');
 const User = require('./user.model');
 
@@ -37,11 +36,3 @@ const deleteUser = async (id) => {
 };
 
 module.exports = { getAll, create, getUser, updateUser, deleteUser };
-=======
-const getAll = async () => {
-  // TODO: mock implementation. should be replaced during task development
-  return [];
-};
-
-module.exports = { getAll };
->>>>>>> ee60976ee4afde3b2d74e4ec936dcd00a7a06e6e

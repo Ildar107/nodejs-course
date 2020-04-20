@@ -28,11 +28,7 @@ N.B. `console.error` пишет ошибку в `process.stderr`, большин
 1. каждый успешный тест при выполнении скрипта `npm run test` +10 баллов.
 2. в тестах не должно быть исправлений, за исключением обновлений из [репозитория RS School](https://github.com/rolling-scopes-school/nodejs-course-template/tree/master). Если есть другие изменения в файлах с тестами, за каждый исправленный тест минус 10 баллов.
 
-<<<<<<< HEAD
   >  **Как обновиться из [репозитория RS School](https://github.com/rolling-scopes-school/nodejs-course-template/tree/master)**
-=======
-  >  ### **Как обновиться из [репозитория RS School](https://github.com/rolling-scopes-school/nodejs-course-template/tree/master)**
->>>>>>> ee60976ee4afde3b2d74e4ec936dcd00a7a06e6e
   >  1. Установить VSCode как дефолтный GIT редактор (не обязательный пункт)
   >    ```bash
   >      git config --global core.editor "code --wait"
