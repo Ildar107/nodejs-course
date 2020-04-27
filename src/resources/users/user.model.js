@@ -19,6 +19,12 @@ userSchema.statics.toResponse = (user) => {
   return { id, name, login };
 }
 
+userSchema.statics.toPayload = (user) => {
+  const { id, login } = user;
+  return { id, login };
+}
+
+
 const User =  mongoose.model('User', userSchema);
 
 module.exports = User;

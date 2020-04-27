@@ -11,7 +11,6 @@ const updateBoard = (id, board) => boardsRepo.updateBoard(id, board);
 
 const deleteBoard = async (id) => {
     const count = await boardsRepo.deleteBoard(id);
-    console.log(count)
     if(count > 0) {
         await tasksService.deleteAllBoardTasks(id);
     }
